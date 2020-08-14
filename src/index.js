@@ -1,17 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const appRoot = document.querySelector("#root");
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+class ShoppingList extends React.Component {
+    render() {
+        return (
+            <div className="shopping-list">
+                <h1>Shopping List for {this.props.name}</h1>
+                <ul>
+                    <li>Instagram</li>
+                    <li>Whatsapp</li>
+                    <li>Oculus</li>
+                </ul>
+                <MyForm />
+            </div>
+        );
+    }
+}
+
+class MyForm extends React.Component {
+    render() {
+        return React.createElement(
+            "div",
+            { className: "my-form" },
+            React.createElement("input", { placeholder: "Escriba su nombre" }),
+            React.createElement("button", {}, "Enviar datos")
+        );
+    }
+}
+
+ReactDOM.render([<ShoppingList />, <MyForm />], appRoot);
