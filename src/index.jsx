@@ -1,13 +1,6 @@
 import React, { useState } from 'react'
 import './index.css'
-
-function Square({ value, onClick }) {
-    return (
-        <div className="square" onClick={onClick}>
-            {value}
-        </div>
-    )
-}
+import { Square } from './components/Square'
 
 function Board({ squares, onClick }) {
     return squares.map((_, square) => <Square key={square} value={squares[square]} onClick={() => onClick(square)} />)
