@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
+import { Board } from './components/Board'
 import './index.css'
-import { Square } from './components/Square'
-
-function Board({ squares, onClick }) {
-    return squares.map((_, square) => <Square key={square} value={squares[square]} onClick={() => onClick(square)} />)
-}
 
 function Game() {
     const [history, setHistory] = useState(() => {
