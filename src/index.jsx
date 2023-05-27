@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Board } from './components/Board'
+import { checkWinner } from './domain/board'
 import './index.css'
 
 function Game() {
@@ -12,12 +13,13 @@ function Game() {
     })
     const [stepNumber, setStepNumber] = useState(0)
     const [xIsNext, setXIsNext] = useState(true)
+    // const [winner, setWinner] = useState(null)
 
     const handleClick = i => {
         const _history = history.slice(0, stepNumber + 1)
         const current = _history[stepNumber]
         const squares = current.squares.slice()
-        if (calculateWinner(squares) || squares[i]) {
+        if (checkWinner(squares) || squares[i]) {
             return
         }
         squares[i] = xIsNext ? 'X' : 'O'
@@ -32,7 +34,7 @@ function Game() {
     }
 
     const current = history[history.length - 1]
-    const winner = calculateWinner(current.squares)
+    const winner = checkWinner(current.squares)
 
     const moves = history.map((_key, index) => {
         return (
@@ -58,29 +60,6 @@ function Game() {
             </div>
         </div>
     )
-}
-
-function calculateWinner(squares) {
-    const lines = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-    ]
-
-    for (let i = 0; i < lines.length; i++) {
-        const [a, b, c] = lines[i]
-
-        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-            return squares[a]
-        }
-    }
-
-    return null
 }
 
 export default Game
