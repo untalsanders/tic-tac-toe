@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Board } from './components/Board'
-import { checkWinner } from './domain/board'
-import './index.css'
+import { checkWinner } from '../domain/board'
+import { TUNRS } from '../domain/constants'
+import { Board } from './Board'
+import '../index.css'
 
 function Game() {
     const [history, setHistory] = useState(() => {
@@ -22,7 +23,7 @@ function Game() {
         if (checkWinner(squares) || squares[i]) {
             return
         }
-        squares[i] = xIsNext ? 'X' : 'O'
+        squares[i] = xIsNext ? TUNRS.X : TUNRS.O
         setHistory(_history.concat([{ squares }]))
         setStepNumber(_history.length)
         setXIsNext(!xIsNext)
@@ -46,10 +47,10 @@ function Game() {
         )
     })
 
-    let status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}`
+    let status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? TUNRS.X : TUNRS.O}`
 
     return (
-        <div className="game">
+        <div className="game"> 
             <h1>Tic Tac Toe</h1>
             <div className="game-board">
                 <Board squares={current.squares} onClick={i => handleClick(i)} />
