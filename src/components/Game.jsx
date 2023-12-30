@@ -17,15 +17,16 @@ function Game() {
     // const [winner, setWinner] = useState(null)
 
     const handleClick = i => {
-        const _history = history.slice(0, stepNumber + 1)
-        const current = _history[stepNumber]
+        const current = history[stepNumber]
         const squares = current.squares.slice()
+        
         if (checkWinner(squares) || squares[i]) {
             return
         }
+        
         squares[i] = xIsNext ? TUNRS.X : TUNRS.O
-        setHistory(_history.concat([{ squares }]))
-        setStepNumber(_history.length)
+        setHistory(history.concat([{ squares }]))
+        setStepNumber(history.length)
         setXIsNext(!xIsNext)
     }
 
